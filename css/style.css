@@ -1,16 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;800&display=swap');
 
+/* Dark Blue (Dark Mode Elements): hsl(209, 23%, 22%)
+- Very Dark Blue (Dark Mode Background): hsl(207, 26%, 17%)
+- Very Dark Blue (Light Mode Text): hsl(200, 15%, 8%)
+- Dark Gray (Light Mode Input): hsl(0, 0%, 52%)
+- Very Light Gray (Light Mode Background): hsl(0, 0%, 98%)
+- White (Dark Mode Text & Light Mode Elements): hsl(0, 0%, 100%) */
+
 .fw-300 { font-weight: 300;}
 .fw-400 { font-weight: 400;}
 .fw-600 { font-weight: 600;}
 .fw-800 { font-weight: 800;}
+
+.fs-small { font-size: 0.75rem;}
+
+.opacity-9 { opacity: 0.85}
 
 
 body {
     background: hsl(0, 0%, 98%);
     color: hsl(200, 15%, 8%);
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.875rem;
+    font-size: 0.825rem;
     font-weight: 300;
 }
 
@@ -19,20 +30,18 @@ body.dark-mode {
     color: hsl(0, 0%, 100%);
 }
 
-/* Dark Blue (Dark Mode Elements): hsl(209, 23%, 22%)
-- Very Dark Blue (Dark Mode Background): hsl(207, 26%, 17%)
-- Very Dark Blue (Light Mode Text): hsl(200, 15%, 8%)
-- Dark Gray (Light Mode Input): hsl(0, 0%, 52%)
-- Very Light Gray (Light Mode Background): hsl(0, 0%, 98%)
-- White (Dark Mode Text & Light Mode Elements): hsl(0, 0%, 100%) */
-
 header {
     background: hsl(0, 0%, 100%);
     box-shadow: 0px 1px 1px 1px rgba(200,200,200,0.25);
 }
 
 body.dark-mode header {
-    background: hsl(209, 23%, 22%)
+    background: hsl(209, 23%, 22%);
+    box-shadow: 0px 0px 5px 2px rgba(54, 54, 54, 0.25);
+}
+
+.switch {
+    cursor: pointer;
 }
 
 .light, .dark {
@@ -41,19 +50,53 @@ body.dark-mode header {
 
 .light.hide, .dark.hide { 
     display: none;
-    /* visibility: hidden; */
+}
+
+form {
+    width: 470px;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
+}
+
+body.dark-mode form {
+    box-shadow: 0px 0px 8px 2px rgba(54, 54, 54, 0.25);   
+}
+
+#search-btn {
+    width: auto;
+    background: hsl(0, 0%, 100%);
+    border: none;
+    outline: none;
+}
+
+#search-input {
+    width: 95%;
+    background: hsl(0, 0%, 100%);
+    border: none;
+    outline: none;
 }
 
 .dropdown {
     width: 200px;
+    position: relative;
+    cursor: pointer;
 }
 
 #dropdown-btn {
     background: hsl(0, 0%, 100%);
+    box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
+}
+
+body.dark-mode #dropdown-btn {
+    box-shadow: 0px 0px 8px 2px rgba(54, 54, 54, 0.25);   
 }
 
 #dropdown-box {
     background: hsl(0, 0%, 100%);
+    position: absolute;
+    top: 55px;
+    left: 0;
+    z-index: 10;
 }
 
 #dropdown-box.hide {
@@ -64,6 +107,10 @@ body.dark-mode #dropdown-btn, body.dark-mode #dropdown-box {
     background: hsl(209, 23%, 22%);
 }
 
+body.dark-mode ul li p {
+    color: hsl(0, 0%, 100%);
+}
+
 ul { list-style: none;}
 
 #countries {
@@ -71,7 +118,7 @@ ul { list-style: none;}
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: repeat(4, 1fr);
-    gap: 60px;
+    gap: 80px;
 }
 
 @media only screen and (max-width: 991.99px) {
@@ -84,19 +131,23 @@ ul { list-style: none;}
 @media only screen and (max-width: 575.99px) {
     #countries {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
+    }
+    .country-card {
+        width: 85%;
+        margin-inline: auto;
     }
 }
 
 .country-card {
-    overflow: hidden;
-    box-shadow: 0px 0px 8px 1px rgba(200,200,200,0.25);
-}
-
-.card-body {
     background: hsl(0, 0%, 100%);
+    overflow: hidden;
+    color: hsl(200, 15%, 8%);
+    box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
 }
 
-body.dark-mode .card-body {
+body.dark-mode .country-card {
     background: hsl(209, 23%, 22%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: 0px 0px 4px 1px rgba(54, 54, 54, 0.25);
 }
