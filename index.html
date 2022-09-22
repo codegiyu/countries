@@ -7,7 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>World Countries</title>
+    <title>World Countries - All Countries</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
     <header>
@@ -41,23 +45,26 @@
                 </div>
                 <div id="dropdown-box" class="w-100 rounded py-2 px-3 hide">
                     <ul class="fs-small m-0 p-0">
-                        <li class="border-0 dropdown-item m-0 p-0 pb-1">
-                            <p id="Africa" class="m-0">Africa</p>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterAfrica()">
+                            <p id="africa" class="m-0">Africa</p>
                         </li>
-                        <li class="border-0 dropdown-item m-0 p-0 pb-1">
-                            <p id="Asia" class="m-0">Asia</p>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterAsia()">
+                            <p id="asia" class="m-0">Asia</p>
                         </li>
-                        <li class="border-0 dropdown-item m-0 p-0 pb-1">
-                            <p id="North America" class="m-0">North America</p>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterNAmerica()">
+                            <p id="nAmerica" class="m-0">North America</p>
                         </li>
-                        <li class="border-0 dropdown-item m-0 p-0 pb-1">
-                            <p id="South America" class="m-0">South America</p>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterSAmerica()">
+                            <p id="sAmerica" class="m-0">South America</p>
                         </li>
-                        <li class="border-0 dropdown-item m-0 p-0 pb-1">
-                            <p id="Europe" class="m-0">Europe</p>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterEurope()">
+                            <p id="europe" class="m-0">Europe</p>
                         </li>
-                        <li class="border-0 dropdown-item m-0 p-0 pb-1">
-                            <p id="Oceania" class="m-0">Oceania</p>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterOceania()">
+                            <p id="oceania" class="m-0">Oceania</p>
+                        </li>
+                        <li class="border-0 dropdown-item m-0 p-0 pb-1" onclick="filterAntarctica()">
+                            <p id="oceania" class="m-0">Antarctica</p>
                         </li>
                     </ul>
                 </div>
@@ -68,97 +75,7 @@
     <section>
         <div class="container pb-5 pt-4 pt-lg-0">
             <div id="countries" class="m-0 p-0">
-                <!-- <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="text-decoration-none m-0 p-0">
-                    <div class="country-card rounded pb-3">
-                        <div class="flag ratio ratio-16x9">
-                            <img src="https://flagcdn.com/w320/ng.png" alt="Flag of Nigeria" class="img-fluid">
-                        </div>
-                        <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">Nigeria</h6>
-                            <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">121,000,000</span></p>
-                            <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">Africa</span></p>
-                            <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">Lagos</span></p>
-                        </div>
-                    </div>
-                </a> -->
+                
             </div>
         </div>
     </section>

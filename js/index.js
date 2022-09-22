@@ -6,6 +6,12 @@ const dropdownBtn = document.querySelector('#dropdown-btn');
 const dropdownBox = document.querySelector('#dropdown-box');
 const dropdownItems = document.querySelectorAll('.dropdown-item');
 const countries = document.querySelector('#countries');
+const africa = document.querySelector('#africa');
+const asia = document.querySelector('#asia');
+const nAmerica = document.querySelector('#nAmerica');
+const sAmerica = document.querySelector('#sAmerica');
+const europe = document.querySelector('#europe');
+const oceania = document.querySelector('#oceania');
 let countriesArr = [];
 
 switcher.addEventListener('click', () => {
@@ -34,7 +40,6 @@ const fetchCountries = () => {
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
             countriesArr = data.map(item => {
                 return {
                     'name': item.name.common,
@@ -45,22 +50,18 @@ const fetchCountries = () => {
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
 
-            console.log(countriesArr)
-
             displayCountries(countriesArr)
         })
 }
 
-fetchCountries()
+fetchCountries();
 
-const comma = num => {
-    String(num).match(/\d{1,3}/g)
-}
+const nameAddress = str => str.replace(' ', '_');
 
 const displayCountries = arr => {
     let card = ``;
     for (let i = 0; i < arr.length; i++) {
-        card += `<a href="country.html?country=${arr[i].name}" class="text-decoration-none m-0 p-0">
+        card += `<a href="country.html?country=${nameAddress(arr[i].name)}" class="text-decoration-none m-0 p-0">
                     <div class="country-card rounded pb-3">
                         <div class="flag ratio ratio-16x9">
                             <img src="${arr[i].flag}" alt="Flag of ${arr[i].name}" class="img-fluid">
@@ -76,4 +77,130 @@ const displayCountries = arr => {
     }
 
     countries.innerHTML = card;    
+}
+
+const filterAfrica = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'Africa')
+            displayCountries(countriesArr)
+        })
+}
+
+const filterAsia = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'Asia')
+            displayCountries(countriesArr)
+        })
+}
+
+const filterNAmerica = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'North America')
+            displayCountries(countriesArr)
+        })
+}
+
+const filterSAmerica = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'South America')
+            displayCountries(countriesArr)
+        })
+}
+
+const filterEurope = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'Europe')
+            displayCountries(countriesArr)
+        })
+}
+
+const filterOceania = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'Oceania')
+            displayCountries(countriesArr)
+        })
+}
+
+const filterAntarctica = () => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countriesArr = data.map(item => {
+                return {
+                    'name': item.name.common,
+                    'population': item.population,
+                    'continent': item.continents[0],
+                    'capital': item.capital,
+                    'flag': item.flags.png
+                }
+            }).sort((a, b) => a.name.localeCompare(b.name))
+            .filter(item => item.continent == 'Antarctica')
+            displayCountries(countriesArr)
+        })
 }
