@@ -45,8 +45,9 @@ const fetchCountries = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
 
@@ -56,12 +57,10 @@ const fetchCountries = () => {
 
 fetchCountries();
 
-const nameAddress = str => str.replace(' ', '_');
-
 const displayCountries = arr => {
     let card = ``;
     for (let i = 0; i < arr.length; i++) {
-        card += `<a href="country.html?country=${nameAddress(arr[i].name)}" class="text-decoration-none m-0 p-0">
+        card += `<a href="country.html?country=${arr[i].code}" class="text-decoration-none m-0 p-0">
                     <div class="country-card rounded pb-3">
                         <div class="flag ratio ratio-16x9">
                             <img src="${arr[i].flag}" alt="Flag of ${arr[i].name}" class="img-fluid">
@@ -88,8 +87,9 @@ const filterAfrica = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'Africa')
@@ -106,8 +106,9 @@ const filterAsia = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'Asia')
@@ -124,8 +125,9 @@ const filterNAmerica = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'North America')
@@ -142,8 +144,9 @@ const filterSAmerica = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'South America')
@@ -160,8 +163,9 @@ const filterEurope = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'Europe')
@@ -178,8 +182,9 @@ const filterOceania = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'Oceania')
@@ -196,8 +201,9 @@ const filterAntarctica = () => {
                     'name': item.name.common,
                     'population': item.population,
                     'continent': item.continents[0],
-                    'capital': item.capital,
-                    'flag': item.flags.png
+                    'capital': item.capital || 'nil',
+                    'flag': item.flags.png,
+                    'code': item.cca3
                 }
             }).sort((a, b) => a.name.localeCompare(b.name))
             .filter(item => item.continent == 'Antarctica')

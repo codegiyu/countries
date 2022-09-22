@@ -3,7 +3,7 @@ const switcher = document.querySelector('#switch');
 const dark = document.querySelector('#dark');
 const light = document.querySelector('#light');
 const country = document.querySelector('#country');
-let singleCountry = new URLSearchParams(window.location.search).get("country");
+let countryCode = new URLSearchParams(window.location.search).get("country");
 let countriesArr = [];
 let countryArr = [];
 
@@ -28,16 +28,18 @@ const fetchCountries = () => {
             })
             console.log(countriesArr)
 
-            fetch(`https://restcountries.com/v3.1/name/${singleCountry}`)
+            fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
             .then(response => response.json())
             .then(data => {
-                document.title = `${singleCountry} - World Countries`
+                document.title = `${data[0].name.common} - World Countries`
 
                 const borders = arr => {
                     let newArr = [], coun = '';
-                    for (let item of arr) {
-                        coun = countriesArr.filter(a => a[0] === item)
-                        newArr.push(coun[0][1])
+                    if (arr != undefined) {
+                        for (let item of arr) {
+                            coun = countriesArr.filter(a => a[0] === item)
+                            newArr.push(coun[0][1])
+                        } 
                     }
                     return newArr
                 }
@@ -64,13 +66,14 @@ const fetchCountries = () => {
                         'nativeName': Object.entries(item.name.nativeName)[0][1].common,
                         'population': item.population.toLocaleString(),
                         'region': item.region,
-                        'subRegion': item.subregion,
+                        'subRegion': item.subregion || 'nil',
                         'continent': String(item.continents),
-                        'capital': String(item.capital),
+                        'capital': String(item.capital || 'nil') ,
                         'tld': String(item.tld),
                         'currencies': cur(item.currencies),
                         'languages': lang(item.languages),
                         'borders': borders(item.borders),
+                        'bordersShort': item.borders,
                         'flag': item.flags.png
                     }
                 })
@@ -83,15 +86,16 @@ const fetchCountries = () => {
 fetchCountries();
 
 const displayCountry = arr => {
-    const nameAddress = str => str.replace(' ', '_');
     const borderBtns = () =>{
         let bCBtn = ``;
-        for (let i = 0; i < arr[0].borders.length; i++) {
-            bCBtn +=    `<a href="country.html?country=${nameAddress(arr[0].borders[i])}" class="text-decoration-none m-0 p-0">
-                            <button class="bc rounded m-0 py-1 px-3 me-1">
-                                <p class="fs-small fw-600 opacity-9 m-0 p-0">${arr[0].borders[i]}</p>
-                            </button>
-                        </a>`
+        if (arr[0].borders != undefined) {
+            for (let i = 0; i < arr[0].borders.length; i++) {
+                bCBtn +=    `<a href="country.html?country=${arr[0].bordersShort[i]}" class="text-decoration-none m-0 p-0">
+                                <button class="bc rounded m-0 py-1 px-3 me-1">
+                                    <p class="fs-small fw-600 opacity-9 m-0 p-0">${arr[0].borders[i]}</p>
+                                </button>
+                            </a>`
+            }
         }
         return bCBtn;
     }
