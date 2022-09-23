@@ -5,6 +5,7 @@ const light = document.querySelector('#light');
 const dropdownBtn = document.querySelector('#dropdown-btn');
 const dropdownBox = document.querySelector('#dropdown-box');
 const dropdownItems = document.querySelectorAll('.dropdown-item');
+const loadingScreen = document.querySelector('.loading-screen');
 const countries = document.querySelector('#countries');
 const africa = document.querySelector('#africa');
 const asia = document.querySelector('#asia');
@@ -12,17 +13,28 @@ const nAmerica = document.querySelector('#nAmerica');
 const sAmerica = document.querySelector('#sAmerica');
 const europe = document.querySelector('#europe');
 const oceania = document.querySelector('#oceania');
+let screenMode;
 let countriesArr = [];
+
+window.onload = () => {
+    if (localStorage.getItem('screenMode') === 'dark') {
+        dark.classList.remove('hide');
+        light.classList.add('hide');
+        body.classList.add('dark-mode');
+    }
+}
 
 switcher.addEventListener('click', () => {
     if (dark.classList.contains('hide')) {
         dark.classList.remove('hide');
         light.classList.add('hide');
         body.classList.add('dark-mode');
+        localStorage.setItem('screenMode', 'dark');
     } else if (light.classList.contains('hide')) {
         light.classList.remove('hide');
         dark.classList.add('hide');
         body.classList.remove('dark-mode');
+        localStorage.setItem('screenMode', 'light');
     }
 })
 
@@ -37,6 +49,8 @@ dropdownItems.forEach(item => {
 })
 
 const fetchCountries = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -47,9 +61,11 @@ const fetchCountries = () => {
                     'continent': item.continents[0],
                     'capital': item.capital || 'nil',
                     'flag': item.flags.png,
-                    'code': item.cca3
+                    'code': item.cca3,
+                    'borders': item.borders || []
                 }
-            }).sort((a, b) => a.name.localeCompare(b.name))
+            }).sort((a,b) => a.borders.length - b.borders.length)
+            // .sort((a, b) => a.name.localeCompare(b.name))
 
             displayCountries(countriesArr)
         })
@@ -75,10 +91,13 @@ const displayCountries = arr => {
                 </a>`
     }
 
-    countries.innerHTML = card;    
+    countries.innerHTML = card;
+    loadingScreen.classList.add('hide');
 }
 
 const filterAfrica = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -98,6 +117,8 @@ const filterAfrica = () => {
 }
 
 const filterAsia = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -117,6 +138,8 @@ const filterAsia = () => {
 }
 
 const filterNAmerica = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -136,6 +159,8 @@ const filterNAmerica = () => {
 }
 
 const filterSAmerica = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -155,6 +180,8 @@ const filterSAmerica = () => {
 }
 
 const filterEurope = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -174,6 +201,8 @@ const filterEurope = () => {
 }
 
 const filterOceania = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -193,6 +222,8 @@ const filterOceania = () => {
 }
 
 const filterAntarctica = () => {
+    loadingScreen.classList.remove('hide');
+    countries.innerHTML = ''
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {

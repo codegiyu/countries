@@ -2,24 +2,37 @@ const body = document.body;
 const switcher = document.querySelector('#switch');
 const dark = document.querySelector('#dark');
 const light = document.querySelector('#light');
+const loadingScreen = document.querySelector('.loading-screen');
 const country = document.querySelector('#country');
+let screenMode;
 let countryCode = new URLSearchParams(window.location.search).get("country");
 let countriesArr = [];
 let countryArr = [];
+
+window.onload = () => {
+    if (localStorage.getItem('screenMode') === 'dark') {
+        dark.classList.remove('hide');
+        light.classList.add('hide');
+        body.classList.add('dark-mode');
+    }
+}
 
 switcher.addEventListener('click', () => {
     if (dark.classList.contains('hide')) {
         dark.classList.remove('hide');
         light.classList.add('hide');
         body.classList.add('dark-mode');
+        localStorage.setItem('screenMode', 'dark');
     } else if (light.classList.contains('hide')) {
         light.classList.remove('hide');
         dark.classList.add('hide');
         body.classList.remove('dark-mode');
+        localStorage.setItem('screenMode', 'light');
     }
 })
 
 const fetchCountries = () => {
+    loadingScreen.classList.remove('hide');
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -90,8 +103,8 @@ const displayCountry = arr => {
         let bCBtn = ``;
         if (arr[0].borders != undefined) {
             for (let i = 0; i < arr[0].borders.length; i++) {
-                bCBtn +=    `<a href="country.html?country=${arr[0].bordersShort[i]}" class="text-decoration-none m-0 p-0">
-                                <button class="bc rounded m-0 py-1 px-3 me-1">
+                bCBtn +=    `<a href="country.html?country=${arr[0].bordersShort[i]}" class="text-decoration-none w-auto h-auto p-0 m-0">
+                                <button class="bc rounded m-0 py-1 px-3">
                                     <p class="fs-small fw-600 opacity-9 m-0 p-0">${arr[0].borders[i]}</p>
                                 </button>
                             </a>`
@@ -100,11 +113,11 @@ const displayCountry = arr => {
         return bCBtn;
     }
 
-    card = `<div class="flag ratio ratio-16x9">
+    card = `<div class="flag ratio ratio-4x3">
                 <img src="${arr[0].flag}" alt="Flag of ${arr[0].commonName}" class="img-fluid">
             </div>
             <div class="details h-100 d-flex align-items-center">
-                <div class="details-wrap">
+                <div class="details-wrap w-100">
                     <h6 class="country-name h3 fw-800 mb-4">${arr[0].commonName}</h6>
                     <div class="detail-columns my-3">
                         <div class="column1">
@@ -120,9 +133,9 @@ const displayCountry = arr => {
                             <p class="fw-600 fs-small mb-2">Languages: <span class="languages fw-300 opacity-9">${arr[0].languages}</span></p>
                         </div>
                     </div>
-                    <div class="borders d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-4 mt-lg-5 mb-5 mb-lg-0">
-                        <p class="fw-600 m-0 mb-2 mb-lg-0">Border Countries: </p>
-                        <div id="bcs" class="border-countries ms-0 ms-lg-3">
+                    <div class="borders mt-4 mt-lg-5 mb-5 mb-lg-0">
+                        <p class="fw-600 m-0 mt-1 mb-lg-0">Border Countries: </p>
+                        <div id="bcs" class="border-countries d-flex flex-wrap ms-0 ms-lg-0">
                             ${borderBtns()}
                         </div>
                     </div>
@@ -130,5 +143,6 @@ const displayCountry = arr => {
                 </div>
             </div>`
 
-    country.innerHTML = card;    
+    country.innerHTML = card;
+    loadingScreen.classList.add('hide');
 }

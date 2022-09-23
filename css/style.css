@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;800&display=swap');
 
-/* Dark Blue (Dark Mode Elements): hsl(209, 23%, 22%)
-- Very Dark Blue (Dark Mode Background): hsl(207, 26%, 17%)
-- Very Dark Blue (Light Mode Text): hsl(200, 15%, 8%)
-- Dark Gray (Light Mode Input): hsl(0, 0%, 52%)
-- Very Light Gray (Light Mode Background): hsl(0, 0%, 98%)
-- White (Dark Mode Text & Light Mode Elements): hsl(0, 0%, 100%) */
+:root {
+    --dmElements: hsl(209, 23%, 22%);
+    --dmBackground: hsl(207, 26%, 17%);
+    --lmText: hsl(200, 15%, 8%);
+    --lmInput: hsl(0, 0%, 52%);
+    --lmBackground: hsl(0, 0%, 98%);
+    --lmElements: hsl(0, 0%, 100%);
+    --dmText: hsl(0, 0%, 100%);
+}
 
 .fw-300 { font-weight: 300;}
 .fw-400 { font-weight: 400;}
@@ -18,26 +21,34 @@
 
 
 body {
-    background: hsl(0, 0%, 98%);
-    color: hsl(200, 15%, 8%);
+    background: var(--lmBackground);
+    color: var(--lmText);
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.825rem;
     font-weight: 300;
 }
 
 body.dark-mode {
-    background: hsl(207, 26%, 17%);
-    color: hsl(0, 0%, 100%);
+    background: var(--dmBackground);
+    color: var(--dmText);
 }
 
 header {
-    background: hsl(0, 0%, 100%);
+    background: var(--lmElements);
     box-shadow: 0px 1px 1px 1px rgba(200,200,200,0.25);
 }
 
 body.dark-mode header {
-    background: hsl(209, 23%, 22%);
+    background: var(--dmElements);
     box-shadow: 0px 0px 5px 2px rgba(54, 54, 54, 0.25);
+}
+
+h1{
+    color: var(--lmText);
+}
+
+body.dark-mode h1 {
+    color: var(--dmText);
 }
 
 .switch {
@@ -93,7 +104,7 @@ body.dark-mode form {
 }
 
 body.dark-mode #search-btn, body.dark-mode #search-input {
-    background: hsl(209, 23%, 22%);
+    background: var(--dmElements);
     color: hsl(0, 0%, 100%);
 }
 
@@ -117,7 +128,7 @@ body.dark-mode #search-input::placeholder {
 }
 
 body.dark-mode .back {
-    background: hsl(209, 23%, 22%);
+    background: var(--dmElements);
     color: hsl(0, 0%, 100%);
     box-shadow: 0px 0px 8px 2px rgba(0, 3, 22, 0.25);
 }
@@ -144,7 +155,7 @@ body.dark-mode #dropdown-btn {
 }
 
 body.dark-mode #dropdown-btn, body.dark-mode #dropdown-box {
-    background: hsl(209, 23%, 22%);
+    background: var(--dmElements);
 }
 
 body.dark-mode ul li p {
@@ -152,6 +163,29 @@ body.dark-mode ul li p {
 }
 
 ul { list-style: none;}
+
+.loading-screen {
+    height: calc(100vh - 200px);
+    width: 100%;
+    top: -10px;
+    left: 0;
+    display: flex;
+    background: var(--lmBackground);
+    z-index: 8;
+}
+
+#loading-screen.hide {
+    display: none;
+    z-index: -1;
+}
+
+body.dark-mode .loading-screen {
+    background: var(--dmBackground);
+}
+
+.loading-screen img {
+    width: 400px;
+}
 
 #countries {
     width: 100%;
@@ -166,7 +200,7 @@ ul { list-style: none;}
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 1.1fr 1fr;
-    gap: 120px;
+    gap: 100px;
 }
 
 .detail-columns {
@@ -186,7 +220,7 @@ ul { list-style: none;}
 }
 
 body.dark-mode .bc {
-    background: hsl(209, 23%, 22%);
+    background: var(--dmElements);
     color: hsl(0, 0%, 100%);
     box-shadow: 0px 0px 4px 1px rgba(0, 3, 22, 0.25);
 }
@@ -241,14 +275,34 @@ body.dark-mode .bc {
 }
 
 .country-card {
-    background: hsl(0, 0%, 100%);
+    background: var(--lmElements);
     overflow: hidden;
-    color: hsl(200, 15%, 8%);
+    color: var(--lmText);
     box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
 }
 
 body.dark-mode .country-card {
-    background: hsl(209, 23%, 22%);
-    color: hsl(0, 0%, 100%);
+    background: var(--dmElements);
+    color: var(--dmText);
     box-shadow: 0px 0px 4px 1px rgba(54, 54, 54, 0.25);
+}
+
+.borders {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+}
+
+@media only screen and (max-width: 991.99px) {
+    .borders {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+}
+
+.border-countries {
+    width: 100%;
+	gap: 3px;
 }
