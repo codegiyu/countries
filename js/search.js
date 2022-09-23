@@ -9,6 +9,8 @@ const dropdownBtn = document.querySelector('#dropdown-btn');
 const dropdownBox = document.querySelector('#dropdown-box');
 const dropdownItems = document.querySelectorAll('.dropdown-item');
 const loadingScreen = document.querySelector('.loading-screen');
+const searchTermElement = document.querySelector('.search-term');
+const resultsNumber = document.querySelector('.results-number');
 const countries = document.querySelector('#countries');
 const africa = document.querySelector('#africa');
 const asia = document.querySelector('#asia');
@@ -17,6 +19,7 @@ const sAmerica = document.querySelector('#sAmerica');
 const europe = document.querySelector('#europe');
 const oceania = document.querySelector('#oceania');
 let searchValue = '';
+let searchTerm = new URLSearchParams(window.location.search).get("search");
 let screenMode;
 let countriesArr = [];
 
@@ -81,7 +84,7 @@ dropdownItems.forEach(item => {
 const fetchCountries = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
-    fetch('https://restcountries.com/v3.1/all')
+    fetch(`https://restcountries.com/v3.1/name/${searchTerm}`)
         .then(response => response.json())
         .then(data => {
             countriesArr = data.map(item => {
@@ -94,7 +97,10 @@ const fetchCountries = () => {
                     'code': item.cca3,
                     'borders': item.borders || []
                 }
-            }).sort(() => Math.random() - Math.random())
+            }).sort((a,b) => a.name.localeCompare(b.name))
+
+            resultsNumber.innerHTML = countriesArr.length || 0;
+            searchTermElement.innerHTML = searchTerm;
 
             displayCountries(countriesArr)
         })
@@ -128,6 +134,7 @@ const filterAll = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr;
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -135,6 +142,7 @@ const filterAfrica = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'Africa')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -142,6 +150,7 @@ const filterAsia = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'Asia')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -149,6 +158,7 @@ const filterNAmerica = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'North America')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -156,6 +166,7 @@ const filterSAmerica = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'South America')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -163,6 +174,7 @@ const filterEurope = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'Europe')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -170,6 +182,7 @@ const filterOceania = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'Oceania')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }
 
@@ -177,5 +190,6 @@ const filterAntarctica = () => {
     loadingScreen.classList.remove('hide');
     countries.innerHTML = ''
     let newCountriesArr = countriesArr.filter(item => item.continent == 'Antarctica')
+    resultsNumber.innerHTML = newCountriesArr.length || 0;
     displayCountries(newCountriesArr)
 }

@@ -39,60 +39,55 @@ const fetchCountries = () => {
             countriesArr = data.map(item => {
                 return [item.cca3, item.name.common]
             })
-            console.log(countriesArr)
+            data = data.filter(item => item.cca3 == countryCode)
+            document.title = `${data[0].name.common} - World Countries`
 
-            fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
-            .then(response => response.json())
-            .then(data => {
-                document.title = `${data[0].name.common} - World Countries`
-
-                const borders = arr => {
-                    let newArr = [], coun = '';
-                    if (arr != undefined) {
-                        for (let item of arr) {
-                            coun = countriesArr.filter(a => a[0] === item)
-                            newArr.push(coun[0][1])
-                        } 
-                    }
-                    return newArr
+            const borders = arr => {
+                let newArr = [], coun = '';
+                if (arr != undefined) {
+                    for (let item of arr) {
+                        coun = countriesArr.filter(a => a[0] === item)
+                        newArr.push(coun[0][1])
+                    } 
                 }
+                return newArr
+            }
 
-                countryArr = data.map(item => {
-                    const lang = obj => {
-                        let arr = Object.entries(obj), newArr = [];
-                        for (let item of arr) {
-                            newArr.push(item[1])
-                        }
-                        return newArr.join(', ')
+            countryArr = data.map(item => {
+                const lang = obj => {
+                    let arr = Object.entries(obj), newArr = [];
+                    for (let item of arr) {
+                        newArr.push(item[1])
                     }
-                    
-                    const cur = obj => {
-                        let arr = Object.entries(obj), newArr = [];
-                        for (let item of arr) {
-                            newArr.push(item[1].name)
-                        }
-                        return newArr.join(', ') 
+                    return newArr.join(', ')
+                }
+                
+                const cur = obj => {
+                    let arr = Object.entries(obj), newArr = [];
+                    for (let item of arr) {
+                        newArr.push(item[1].name)
                     }
-                    
-                    return {
-                        'commonName': item.name.common,
-                        'nativeName': Object.entries(item.name.nativeName)[0][1].common,
-                        'population': item.population.toLocaleString(),
-                        'region': item.region,
-                        'subRegion': item.subregion || 'nil',
-                        'continent': String(item.continents),
-                        'capital': String(item.capital || 'nil') ,
-                        'tld': String(item.tld),
-                        'currencies': cur(item.currencies),
-                        'languages': lang(item.languages),
-                        'borders': borders(item.borders),
-                        'bordersShort': item.borders,
-                        'flag': item.flags.png
-                    }
-                })
-                console.log(countryArr)
-                displayCountry(countryArr)
+                    return newArr.join(', ') 
+                }
+                
+                return {
+                    'commonName': item.name.common,
+                    'nativeName': Object.entries(item.name.nativeName)[0][1].common,
+                    'population': item.population.toLocaleString(),
+                    'region': item.region,
+                    'subRegion': item.subregion || 'nil',
+                    'continent': String(item.continents),
+                    'capital': String(item.capital || 'nil') ,
+                    'tld': String(item.tld),
+                    'currencies': cur(item.currencies),
+                    'languages': lang(item.languages),
+                    'borders': borders(item.borders),
+                    'bordersShort': item.borders,
+                    'flag': item.flags.png
+                }
             })
+            console.log(countryArr)
+            displayCountry(countryArr)
         })
 }
 
