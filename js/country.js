@@ -113,7 +113,7 @@ const displayCountry = arr => {
             </div>
             <div class="details h-100 d-flex align-items-center">
                 <div class="details-wrap w-100">
-                    <h6 class="country-name h3 fw-800 mb-4">${arr[0].commonName}</h6>
+                    <h2 class="country-name h3 fw-800 mb-4">${arr[0].commonName}</h2>
                     <div class="detail-columns my-3">
                         <div class="column1">
                             <p class="fw-600 fs-small mb-2">Native Name: <span class="native_name fw-300 opacity-9">${arr[0].nativeName}</span></p>

@@ -111,7 +111,7 @@ const displayCountries = arr => {
                             <img src="${arr[i].flag}" alt="Flag of ${arr[i].name}" class="img-fluid">
                         </div>
                         <div class="card-body d-flex flex-column py-4 px-4">
-                            <h6 class="country-name h5 fw-800 mb-3">${arr[i].name}</h6>
+                            <h2 class="country-name h5 fw-800 mb-3">${arr[i].name}</h2>
                             <p class="fw-600 fs-small mb-1">Population: <span class="population fw-300 opacity-9">${arr[i].population.toLocaleString()}</span></p>
                             <p class="fw-600 fs-small mb-1">Continent: <span class="region fw-300 opacity-9">${arr[i].continent}</span></p>
                             <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">${arr[i].capital}</span></p>
