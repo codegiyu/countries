@@ -52,7 +52,7 @@ searchInput.addEventListener('blur', () => {
 })
 
 searchInput.addEventListener('input', () => {
-    searchInput.value = searchInput.value.replace(/[^a-zA-Z ]/g, '')
+    searchInput.value = searchInput.value.replace(/[^a-zA-Z \-]/g, '')
     searchValue = searchInput.value;
 })
 
@@ -97,6 +97,17 @@ const fetchCountries = () => {
             }).sort(() => Math.random() - Math.random())
 
             displayCountries(countriesArr)
+        })
+        .catch(err => {
+            loadingScreen.classList.add('hide');
+            console.log(err)
+            let errMessage =    `<div>
+                                    <h2>Something went wrong.</h2>
+                                    <details>
+                                        ${err.toString()}
+                                    </details>
+                                </div>`
+            countries.innerHTML = errMessage
         })
 }
 

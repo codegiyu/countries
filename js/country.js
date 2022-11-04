@@ -39,10 +39,7 @@ const fetchCountries = () => {
             countriesArr = data.map(item => {
                 return [item.cca3, item.name.common]
             })
-            console.log(countriesArr)
-            console.log(countryCode)
             data = data.filter(item => item.cca3 === countryCode)
-            console.log(data)
             document.title = `${data[0].name.common} - World Countries`
 
             const borders = arr => {
@@ -89,8 +86,17 @@ const fetchCountries = () => {
                     'flag': item.flags.png
                 }
             })
-            console.log(countryArr)
             displayCountry(countryArr)
+        })
+        .catch(err => {
+            loadingScreen.classList.add('hide');
+            let errMessage =    `<div>
+                                    <h2>Something went wrong.</h2>
+                                    <details>
+                                        ${err.toString()}
+                                    </details>
+                                </div>`
+            country.innerHTML = errMessage
         })
 }
 
