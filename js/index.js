@@ -52,7 +52,7 @@ searchInput.addEventListener('blur', () => {
 })
 
 searchInput.addEventListener('input', () => {
-    searchInput.value = searchInput.value.replace(/[^a-zA-Z]/g, '')
+    searchInput.value = searchInput.value.replace(/[^a-zA-Z ]/g, '')
     searchValue = searchInput.value;
 })
 
